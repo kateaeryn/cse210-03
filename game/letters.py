@@ -1,5 +1,4 @@
 import random
-import functools
 
 class Letters:
     """A class that handles the user's guess and the words to be guessed
@@ -25,7 +24,7 @@ class Letters:
         
         args: self: an instance of letters
         """
-        board = ["_", "_", "_", "_", "_"]
+        board = self.board
         full_board = ' '.join(board)
         return full_board
         
@@ -43,9 +42,16 @@ class Letters:
         
         args:
         """
+        word = self.word
+        if guess in word:
+            return True
+        else:
+            return False
+ 
+    def update_board(self, guess):
+
         board = self.board
         word = self.word
-        
         if guess in word:            
             for i in range(len(word)):
                 if word[i] == guess:
@@ -61,7 +67,6 @@ class Letters:
         word = []
         board = self.board
         word[:0] = self.word
-       
         if board == word:
             print("You win!")
             return True

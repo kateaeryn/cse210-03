@@ -13,25 +13,30 @@ class Parachute:
         args:
 
         """
+        self.parachute = ['    ___', '\n  /', '___', '\ ', '\n  \ ', '   /', '\n   \ ',  ' /', '\n     O', '\n    /|\ ', '\n    / \ \n', '\n ^^^^^^^^^^']
+
     def create_parachute(self):
-
-        self.parachute = ["___\n"
-            "/ ___ \\n"
-            "\     /\n"
-             "\   /\n"
-               "O\n"
-              "/|\\n"
-              "/ \\n"
-              "^^^^^^^^^^^" ]
+        
+        chute = ' '.join(self.parachute)
+        return chute
        
-    def cut_strings(self):
-
-        self.parachute.pop()
+    def update_chute(self, check):
+        
+        if check == False:
+            parachute = self.parachute
+            parachute.pop(0)
+            if len(parachute) < 5:
+                parachute[0] = '     X'
+            cut_chute = ' '.join(parachute)
+            return cut_chute
+        else:
+            current_chute = ' '.join(self.parachute)
+            return current_chute
 
     def strings_left(self):
 
-        if self.parachute <= 5:
-            response = "Sorry you died"
-            return response
+        if len(self.parachute) < 5:
+            print("Sorry you died\n")
+            return True
         else:
-            return
+            return False

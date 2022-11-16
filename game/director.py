@@ -25,7 +25,7 @@ class Director:
         self._parachute = Parachute()
         self._letters = Letters()
         self._guess = ""
-        
+        self._jumper = True
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -35,6 +35,7 @@ class Director:
         """
         print("\nJumper is a guessing game. Choose one letter at a time to guess the word, but be careful, too many wrong guesses will drop your jumper faster!\n")
         self._terminal_service.write_text(self._letters.create_board())
+        print()
         self._terminal_service.write_text(self._parachute.create_parachute())
         while self._is_playing:
             self._get_inputs()
@@ -48,10 +49,10 @@ class Director:
             self (Director): An instance of Director.
         """
         self._guess = self._terminal_service.read_letter("\nGuess a letter [a-z]:")
+        print()
         self._letters.input(self._guess)
-        ##self._letters.check_guess(self._guess)
-
-        
+        self._jumper = self._letters.check_guess(self._guess)
+            
 
     def _do_updates(self):
         """Compares letter guess to word.
@@ -59,9 +60,11 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._terminal_service.write_text(self._letters.check_guess(self._guess))
-        if self._letters.check_full():
-            self._is_playing = False
+    
+        self._terminal_service.write_text(self._letters.update_board(self._guess))
+        print()
+        self._terminal_service.write_text(self._parachute.update_chute(self._jumper))        
+        print()
       
 
     def _do_outputs(self):
@@ -70,5 +73,9 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-       ## self._parachute.strings_left()
+        if self._letters.check_full():
+            self._is_playing = False
+            
+        if self._parachute.strings_left():
+            self._is_playing = False
         
