@@ -14,7 +14,7 @@ class Letters:
         args:
         
         """
-        word_pool = ["chess", "heart", "light", "adieu", "broke", "horse", "spirit", "panther", "dog", "cable", "weather"]
+        word_pool = ["chess", "heart", "light", "adieu", "broke", "horse", "spirit", "panther", "dog", "cable", "weather", "piano", "water", "video", "parachute", "shiny", "python", "module", "terminate", "maple", "snarl", "wheel"]
         self.word = random.choice(word_pool)
         self.board = ['_'] * len(self.word)
         self.dict = []
@@ -68,7 +68,7 @@ class Letters:
         board = self.board
         word[:0] = self.word
         if board == word:
-            print("You win!")
+            print("Congratulations, You Win!")
             return True
         else: 
             return False
