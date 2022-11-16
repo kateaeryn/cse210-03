@@ -8,10 +8,12 @@ class Director:
     The responsibility of a Director is to control the sequence of play.
 
     Attributes:
-        letters: for getting the word, and creating the playing board
         is_playing (boolean): Whether or not to keep playing.
-        terminal_service: For getting and displaying information on the terminal.
-        parachute: for drawing the parachute and removing strings
+        terminal_service: (class): For getting and displaying information on the terminal.
+        parachute: (class): For drawing the parachute and removing strings
+        letters: (class): For getting the word, and creating the playing board
+        guess: (string): For storing user input
+        jumper: (boolean): whether or not user input matches the guessing word
     """
 
     def __init__(self):
@@ -77,5 +79,6 @@ class Director:
             self._is_playing = False
             
         if self._parachute.strings_left():
+            self._terminal_service.write_text(f"Your word was: {self._letters._word}\n")
             self._is_playing = False
         
